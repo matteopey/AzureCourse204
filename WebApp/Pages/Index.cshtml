@@ -1,0 +1,14 @@
+﻿@page
+@model IndexModel
+
+@inject IConfiguration Configuration;
+
+@{
+    ViewData["Title"] = "Home page";
+    var lang = Configuration.GetSection("Language").Get<string>();
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome @lang</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
