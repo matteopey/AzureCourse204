@@ -8,11 +8,17 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
+[StorageAccount("AzureWebJobsStorage")]
 public static class GetSettingInfo
 {
     [FunctionName("GetSettingInfo")]
-    public static IActionResult Run(
+    [return: Queue("queue")]
+    public static string Run(
         [HttpTrigger("GET")] HttpRequest request,
+        ILogger logger,
         [Blob("content/settings.json")] string json)
-        => new OkObjectResult(json);
+    {
+        logger.LogInformation("Sending to queue");
+        return json;
+    }
 }
