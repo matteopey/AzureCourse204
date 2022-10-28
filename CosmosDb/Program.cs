@@ -56,3 +56,9 @@ while (feedIterator.HasMoreResults)
 		Console.WriteLine($"{item.id} {item.categoryId} {item.price}");
 	}
 }
+
+response = await container.CreateItemAsync(newItem, requestOptions: new ItemRequestOptions
+{
+	PreTriggers = new List<string> { "trgTimestampValidation" }
+});
+Console.WriteLine(response.StatusCode);
